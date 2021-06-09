@@ -88,7 +88,8 @@ if __name__ == '__main__':
     def verifyIndividualsCoverOverallTotal (orders, total):
         ordersTotal = 0.00
         for o in orders:
-            ordersTotal = float(ordersTotal) + float(o.total)
+            ordersTotal = round(float(ordersTotal) + float(o.total), 2)
+        revealIndividualDetails(orders)
         if ordersTotal == total:
             logger.writeLine("The sum of individual totals covers the total exactly!")
         elif ordersTotal < total:
@@ -103,6 +104,19 @@ if __name__ == '__main__':
     def revealIndividualTotals (orders):
         for o in orders:
             logger.writeLine(o.name + "'s total is: $" + str(o.total))
+
+    def revealIndividualDetails(orders):
+        for o in orders:
+            logger.writeLine("")
+            logger.writeLine("############# " + o.name + "'s Order Details Start #############" )
+            logger.writeLine("Name: " + o.name)
+            logger.writeLine("subtotal: " + str(o.subtotal))
+            logger.writeLine("tax: " + str(o.tax))
+            logger.writeLine("tip: " + str(o.tip))
+            logger.writeLine("fees: " + str(o.fees))
+            logger.writeLine("total: " + str(o.total))
+            logger.writeLine("############# " + o.name + "'s Order Details End  #############" )
+            logger.writeLine("")
 
     ############################################# Kickoff process here #############################################
     process()
